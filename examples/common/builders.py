@@ -28,7 +28,7 @@ from examples.common.optim import (DecoupledAdaLRLion, DecoupledClipLion,
 from examples.common.resumption_callbacks import GlobalLRScaling, LayerFreezing
 from examples.common.scheduled_gc_callback import ScheduledGarbageCollector
 from examples.common.text_data import Tokenizer, build_text_dataloader
-
+from examples.llm.src.models.utils.cerebrate_tokenizer import CerebrateArEnTokenizer
 Tokenizer = Union[PreTrainedTokenizer, PreTrainedTokenizerFast]
 
 
@@ -140,8 +140,8 @@ def build_tokenizer(om_tokenizer_config: DictConfig,) -> Tokenizer:
     tokenizer_kwargs = resolved_om_tokenizer_config.get(  # type: ignore
         'kwargs', {})
     tokenizer_name = resolved_om_tokenizer_config['name']  # type: ignore
-    tokenizer = AutoTokenizer.from_pretrained(tokenizer_name,
-                                              **tokenizer_kwargs)
+
+    tokenizer = CerebrateArEnTokenizer.from_pretrained('Ogul/CerebrateArEnTokenizer', **tokenizer_kwargs)
 
     # HuggingFace does not respect the model_max_length kwarg, and overrides it with
     # min(kwargs['model_max_length'], original_config['model_max_length']), so we
