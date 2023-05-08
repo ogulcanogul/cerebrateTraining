@@ -208,7 +208,7 @@ def alpaca_tokenize_function(inp: Dict, tokenizer: Tokenizer):
     )
 
 
-@dataset_constructor.register('HuggingFaceH4/databricks_dolly_15k')
+@dataset_constructor.register('HuggingFaceH4/databricks_dolly_15k', 'Ogul/CerebrateFinetuneInstructionDataset')
 def dolly_tokenize_function(inp: Dict, tokenizer: Tokenizer):
     """Format the text string and tokenize."""
     PROMPT_FORMAT = 'Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\n{instruction}\n\n### Response:\n'

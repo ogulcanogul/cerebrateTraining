@@ -34,7 +34,7 @@ class CerebrateArEnTokenizer(PreTrainedTokenizer):
         vocab_file,
         bos_token="<s>",
         eos_token="</s>",
-        pad_token=None,
+        pad_token="[PAD]",
         unk_token="<unk>",
         sp_model_kwargs: Optional[Dict[str, Any]] = None,
         add_bos_token=False,
