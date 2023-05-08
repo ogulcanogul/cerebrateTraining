@@ -155,6 +155,7 @@ class DatasetConstructor:
     def build(self, cfg: DictConfig, tokenizer: Tokenizer):
         dataset_name = cfg.name
         split = cfg.split
+        token = cfg.use_auth_token
         kwargs = cfg.get('kwargs', {})
 
         if dataset_name not in self._task_tokenization_registry:
@@ -163,7 +164,7 @@ class DatasetConstructor:
                 f'Available datasets: {self._task_tokenization_registry.keys()}'
             )
 
-        dataset = datasets.load_dataset(dataset_name, split=split, **kwargs)
+        dataset = datasets.load_dataset(dataset_name, split=split, use_auth_token=token,  **kwargs)
 
         tokenize_function = partial(
             self._task_tokenization_registry[dataset_name], tokenizer=tokenizer)
