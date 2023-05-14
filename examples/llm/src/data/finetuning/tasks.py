@@ -229,6 +229,30 @@ def dolly_tokenize_function(inp: Dict, tokenizer: Tokenizer):
     )
 
 
+@dataset_constructor.register('Ogul/CerebrateFinetuneInstructionDataset')
+def cerebrate_tokenize_function(inp: Dict, tokenizer: Tokenizer):
+    """Format the text string and tokenize."""
+    PROMPT_FORMAT = 'A chat between a curious human and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the human\'s questions.\n\n'
+    try:
+        prompt = ''
+        prompt = prompt + PROMPT_FORMAT
+        if inp['content'] != '':
+            prompt = prompt + '###Content:\n\n' + inp['content'] + '\n\n'
+        if inp['input'] != '':
+            prompt = prompt + '###Human:\n\n' + inp['instruction'] + '\n\n' + inp['input']
+        else:
+            prompt = prompt + '###Human:\n\n' + inp['instruction']
+        prompt = prompt + '\n\n'  + '###Asistant:\n\n'
+        response = inp['output']
+    except Exception as e:
+        raise ValueError(
+            f'Unable to extract prompt/response from {inp=}') from e
+    return tokenizer(
+        text=prompt,
+        text_target=response,
+    )
+
+
 @dataset_constructor.register('sam-mosaic/full-hh-rlhf-chatml',
                               'sam-mosaic/vicuna_alpaca_hc3_chatml')
 def simple_tokenize_function(inp: Dict, tokenizer: Tokenizer):
