@@ -238,11 +238,13 @@ def cerebrate_tokenize_function(inp: Dict, tokenizer: Tokenizer):
         prompt = prompt + PROMPT_FORMAT
         if inp['content'] != '':
             prompt = prompt + '###Content:\n\n' + inp['content'] + '\n\n'
+        if inp['history'] != '':
+            prompt = prompt + inp['history']
         if inp['input'] != '':
-            prompt = prompt + '###Human:\n\n' + inp['instruction'] + '\n\n' + inp['input']
+            prompt = prompt + '###User:\n\n' + inp['instruction'] + '\n\n' + inp['input']
         else:
-            prompt = prompt + '###Human:\n\n' + inp['instruction']
-        prompt = prompt + '\n\n'  + '###Asistant:\n\n'
+            prompt = prompt + '###User:\n\n' + inp['instruction']
+        prompt = prompt + '\n\n'  + '###Assistant:\n\n'
         response = inp['output']
     except Exception as e:
         raise ValueError(
