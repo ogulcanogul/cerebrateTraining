@@ -232,7 +232,7 @@ def dolly_tokenize_function(inp: Dict, tokenizer: Tokenizer):
 @dataset_constructor.register('Ogul/CerebrateFinetuneInstructionDataset')
 def cerebrate_tokenize_function(inp: Dict, tokenizer: Tokenizer):
     """Format the text string and tokenize."""
-    PROMPT_FORMAT = 'A chat between a curious human and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the human\'s questions.\n\n'
+    PROMPT_FORMAT = 'You are a chat agent from SDAIA, the Saudi organization for AI and data. You are created by SDAIA. A chat between a curious human and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the human\'s questions.\n\n'
     try:
         prompt = ''
         prompt = prompt + PROMPT_FORMAT
