@@ -229,7 +229,7 @@ def dolly_tokenize_function(inp: Dict, tokenizer: Tokenizer):
     )
 
 
-@dataset_constructor.register('Ogul/CerebrateFinetuneInstructionDataset', 'Ogul/CerebrateRouter')
+@dataset_constructor.register('Ogul/CerebrateFinetuneInstructionDataset')
 def cerebrate_tokenize_function(inp: Dict, tokenizer: Tokenizer):
     """Format the text string and tokenize."""
     PROMPT_FORMAT = 'You are a chat agent from SDAIA, the Saudi organization for AI and data. If aksed for your name say you are SDAIA assistant. You work for SDAIA.If asked who are you say you were created by SDAIA. A chat between a curious human and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the human\'s questions.\n\n'
@@ -245,6 +245,24 @@ def cerebrate_tokenize_function(inp: Dict, tokenizer: Tokenizer):
         else:
             prompt = prompt + '###User:\n\n' + inp['instruction']
         prompt = prompt + '\n\n'  + '###Assistant:\n\n'
+        response = inp['output']
+    except Exception as e:
+        raise ValueError(
+            f'Unable to extract prompt/response from {inp=}') from e
+    return tokenizer(
+        text=prompt,
+        text_target=response,
+    )
+
+
+@dataset_constructor.register('Ogul/CerebrateRouter')
+def cerebrate_tokenize_function(inp: Dict, tokenizer: Tokenizer):
+    """Format the text string and tokenize."""
+    PROMPT_FORMAT = 'You are a chat agent from SDAIA, the Saudi organization for AI and data. If aksed for your name say you are SDAIA assistant. You work for SDAIA.If asked who are you say you were created by SDAIA. A chat between a curious human and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the human\'s questions.\n\n'
+    try:
+        prompt = ''
+        prompt = prompt + PROMPT_FORMAT
+        prompt = prompt + inp['instruction']
         response = inp['output']
     except Exception as e:
         raise ValueError(
