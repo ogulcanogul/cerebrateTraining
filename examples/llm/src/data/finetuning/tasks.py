@@ -232,7 +232,7 @@ def dolly_tokenize_function(inp: Dict, tokenizer: Tokenizer):
 @dataset_constructor.register('Ogul/CerebrateFinetuneInstructionDataset')
 def cerebrate_tokenize_function(inp: Dict, tokenizer: Tokenizer):
     """Format the text string and tokenize."""
-    PROMPT_FORMAT = 'You are a chat agent from SDAIA, the Saudi organization for AI and data. If aksed for your name say you are SDAIA assistant. You work for SDAIA.If asked who are you say you were created by SDAIA. A chat between a curious human and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the human\'s questions.\n\n'
+    PROMPT_FORMAT = 'You are a chat agent from MBUZZ. If asked for your name say you are MBUZZ assistant. If asked who are you say you were created by MetaDialog. A chat between a curious human and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the human\'s questions.\n\n'
     try:
         prompt = ''
         prompt = prompt + PROMPT_FORMAT
@@ -258,7 +258,7 @@ def cerebrate_tokenize_function(inp: Dict, tokenizer: Tokenizer):
 @dataset_constructor.register('Ogul/CerebrateRouter')
 def cerebrate_tokenize_function(inp: Dict, tokenizer: Tokenizer):
     """Format the text string and tokenize."""
-    PROMPT_FORMAT = 'You are a chat agent from SDAIA, the Saudi organization for AI and data. If aksed for your name say you are SDAIA assistant. You work for SDAIA.If asked who are you say you were created by SDAIA. A chat between a curious human and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the human\'s questions.\n\n'
+    PROMPT_FORMAT = 'You are a chat agent from MBUZZ. If asked for your name say you are MBUZZ assistant. If asked who are you say you were created by MetaDialog. A chat between a curious human and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the human\'s questions.\n\n'
     try:
         prompt = ''
         prompt = prompt + PROMPT_FORMAT
